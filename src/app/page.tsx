@@ -17,10 +17,10 @@ export default function Home() {
       <div className="border-x border-zinc-900 h-full w-full py-16 flex flex-col gap-y-16">
         <div className="h-[15rem] flex items-center justify-center">
           <div className="flex flex-col gap-y-8">
-            <div className="w-full flex flex-col justify-center items-center gap-2">
+            <div className="w-full flex flex-col justify-center items-center gap-6">
              <LanguageSwitcher />
 
-              <h1 className="text-4xl font-bold tracking-[-5%] text-zinc-200">
+              <h1 className="text-3xl sm:text-4xl font-bold tracking-[-5%] text-zinc-200">
                 {t("title")}
               </h1>
             </div>
