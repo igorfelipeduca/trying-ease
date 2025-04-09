@@ -1,7 +1,7 @@
 "use client";
 
 import { useAnimationControls } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Block from "./block";
 import AnimationButtons from "./animation-buttons";
 import { isMobile } from "@/utils/is-mobile";
@@ -17,7 +17,7 @@ export default function Playground({ ease }: PlaygroundProps) {
   const onPlayAnimation = () => {
     blockControl
       .start({
-        translateX: isMobile() ? 200 :700,
+        translateX: isMobile() ? 200 : 700,
         rotate: 360,
         transition: {
           duration: 3,
@@ -40,6 +40,10 @@ export default function Playground({ ease }: PlaygroundProps) {
     });
   };
 
+  const onPauseAnimation = () => {
+    blockControl.stop();
+  };
+
   return (
     <div className="flex flex-col w-full gap-y-8">
       <div className="h-[20rem] flex items-center p-4">
@@ -51,6 +55,7 @@ export default function Playground({ ease }: PlaygroundProps) {
           isAnimationOver={isAnimationOver}
           onPlayAnimation={onPlayAnimation}
           onResetAnimation={onResetAnimation}
+          onPauseAnimation={onPauseAnimation}
         />
       </div>
     </div>

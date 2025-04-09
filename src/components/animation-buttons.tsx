@@ -1,27 +1,37 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, useAnimationControls } from "framer-motion";
-import { PlayCircleIcon, RotateCcw } from "lucide-react";
+import {
+  PauseCircleIcon,
+  PlayCircleIcon,
+  RotateCcw,
+  TurtleIcon,
+} from "lucide-react";
 import { isMobile } from "@/utils/is-mobile";
 
 type AnimationButtonsProps = {
   isAnimationOver: boolean;
   onPlayAnimation: () => void;
   onResetAnimation: () => void;
+  onPauseAnimation: () => void;
 };
 
 export default function AnimationButtons({
   isAnimationOver,
   onResetAnimation,
   onPlayAnimation,
+  onPauseAnimation,
 }: AnimationButtonsProps) {
   const playButtonAnimationControls = useAnimationControls();
+  const [isAnimationPlaying, setIsAnimationPlaying] = useState(false);
 
   useEffect(() => {
     if (isAnimationOver) {
+      setIsAnimationPlaying(false);
+
       playButtonAnimationControls.start({
-        translateX: isMobile() ? 0 : -100,
+        translateX: isMobile() ? 0 : -110,
         translateY: isMobile() ? -30 : 0,
         transition: {
           duration: 0.3,
@@ -33,22 +43,47 @@ export default function AnimationButtons({
 
   return (
     <div className="flex flex-col sm:flex-row items-center gap-6 relative">
-      <motion.button
-        type="button"
-        className="py-2 px-4 rounded-full border border-zinc-800 bg-zinc-900 text-white flex items-center justify-center cursor-pointer ease-initial transition-colors duration-300 hover:bg-zinc-800 font-medium text-md sm:text-lg gap-x-2 w-fit"
-        onClick={onPlayAnimation}
-        whileTap={{
-          scale: 1.1,
-          transition: {
-            duration: 1,
-            ease: "easeOut",
-          },
-        }}
-        animate={playButtonAnimationControls}
-      >
-        <PlayCircleIcon className="size-5" />
-        Play Animation
-      </motion.button>
+      {isAnimationPlaying ? (
+        <motion.button
+          type="button"
+          className="py-2 px-4 rounded-full border border-zinc-800 bg-zinc-900 text-white flex items-center justify-center cursor-pointer ease-initial transition-colors duration-300 hover:bg-zinc-800 font-medium text-md sm:text-lg gap-x-2 w-fit"
+          onClick={() => {
+            onPauseAnimation();
+            setIsAnimationPlaying(false);
+          }}
+          whileTap={{
+            scale: 1.1,
+            transition: {
+              duration: 1,
+              ease: "easeOut",
+            },
+          }}
+          animate={playButtonAnimationControls}
+        >
+          <PauseCircleIcon className="size-5" />
+          Pause Animation
+        </motion.button>
+      ) : (
+        <motion.button
+          type="button"
+          className="py-2 px-4 rounded-full border border-zinc-800 bg-zinc-900 text-white flex items-center justify-center cursor-pointer ease-initial transition-colors duration-300 hover:bg-zinc-800 font-medium text-md sm:text-lg gap-x-2 w-fit"
+          onClick={() => {
+            setIsAnimationPlaying(true);
+            onPlayAnimation();
+          }}
+          whileTap={{
+            scale: 1.1,
+            transition: {
+              duration: 1,
+              ease: "easeOut",
+            },
+          }}
+          animate={playButtonAnimationControls}
+        >
+          <PlayCircleIcon className="size-5" />
+          Play Animation
+        </motion.button>
+      )}
 
       {isAnimationOver && (
         <motion.button
@@ -73,7 +108,10 @@ export default function AnimationButtons({
               ease: "easeOut",
             },
           }}
-          onClick={onResetAnimation}
+          onClick={() => {
+            setIsAnimationPlaying(true);
+            onResetAnimation();
+          }}
         >
           <RotateCcw className="size-5" />
           Reset Animation

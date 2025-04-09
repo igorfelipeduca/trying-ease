@@ -38,10 +38,10 @@ export default function LinkText({ text, href }: LinkTextProps) {
       onHoverEnd={onHoverEnd}
       className="inline-flex flex-col"
     >
-      <div className="flex items-center">
+      <span className="flex items-center">
         <span className="text-zinc-300">{text} </span>
         <ArrowUpRightIcon className="text-zinc-300" />
-      </div>
+      </span>
       <motion.span animate={underlineControler} className="h-px w-0 bg-white" />
     </motion.a>
   );
