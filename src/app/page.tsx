@@ -19,8 +19,8 @@ export default function Home() {
 
             <div className="w-full flex justify-center">
               <h2 className="text-xl px-4 sm:px-0 sm:max-w-[40rem] text-center font-medium text-zinc-500 tracking-[-5%]">
-                Experimenting with different types of eases. Using default ones
-                and custom ones from{" "}
+                Experimenting with different types of eases. Implement default easing presets from CSS
+                and custom presets from{" "}
                 <LinkText
                   text={'"The Easing Blueprint"'}
                   href="https://www.reubence.com/articles/the-easing-blueprint"
