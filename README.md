@@ -2,6 +2,14 @@
 
 This project demonstrates various animation easing functions using Framer Motion in a Next.js application. It provides interactive playgrounds to visualize the effect of different eases.
 
+## Live Preview
+
+Check out the live preview at [https://ease.duca.dev](https://ease.duca.dev)
+
+![Ease Types Showcase](/public/thumb.png)
+
+
+
 ## Components
 
 This section describes all components located in `src/components/`.
