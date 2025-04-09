@@ -1,7 +1,7 @@
 "use client";
 
 import { useAnimationControls } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Block from "./block";
 import AnimationButtons from "./animation-buttons";
 import { isMobile } from "@/utils/is-mobile";

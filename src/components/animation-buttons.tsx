@@ -2,12 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, useAnimationControls } from "framer-motion";
-import {
-  PauseCircleIcon,
-  PlayCircleIcon,
-  RotateCcw,
-  TurtleIcon,
-} from "lucide-react";
+import { PauseCircleIcon, PlayCircleIcon, RotateCcw } from "lucide-react";
 import { isMobile } from "@/utils/is-mobile";
 
 type AnimationButtonsProps = {
