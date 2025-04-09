@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, useAnimationControls } from "framer-motion";
 import { PauseCircleIcon, PlayCircleIcon, RotateCcw } from "lucide-react";
 import { isMobile } from "@/utils/is-mobile";
+import { useLanguage } from "@/utils/i18n/language-context";
 
 type AnimationButtonsProps = {
   isAnimationOver: boolean;
@@ -20,6 +21,7 @@ export default function AnimationButtons({
 }: AnimationButtonsProps) {
   const playButtonAnimationControls = useAnimationControls();
   const [isAnimationPlaying, setIsAnimationPlaying] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (isAnimationOver) {
@@ -56,7 +58,7 @@ export default function AnimationButtons({
           animate={playButtonAnimationControls}
         >
           <PauseCircleIcon className="size-5" />
-          Pause Animation
+          {t("pauseAnimation")}
         </motion.button>
       ) : (
         <motion.button
@@ -76,7 +78,7 @@ export default function AnimationButtons({
           animate={playButtonAnimationControls}
         >
           <PlayCircleIcon className="size-5" />
-          Play Animation
+          {t("playAnimation")}
         </motion.button>
       )}
 
@@ -109,7 +111,7 @@ export default function AnimationButtons({
           }}
         >
           <RotateCcw className="size-5" />
-          Reset Animation
+          {t("resetAnimation")}
         </motion.button>
       )}
     </div>

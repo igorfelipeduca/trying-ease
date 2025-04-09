@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
+import { LanguageProvider } from "@/utils/i18n/language-context";
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -42,8 +43,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.className} antialiased`}>{children}</body>
+    <html>
+      <body className={`${geistSans.className} antialiased`}>
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
+      </body>
     </html>
   );
 }
