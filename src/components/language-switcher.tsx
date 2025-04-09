@@ -84,26 +84,6 @@ export default function LanguageSwitcher() {
     }
   };
 
-  const onBumpSpan = (lang: "en" | "pt-BR") => {
-    if (lang === "en") {
-      englishLanguageController.start({
-        scale: 1.1,
-        transition: {
-          ease: "easeOut",
-          duration: 0.2,
-        },
-      });
-    } else {
-      portugueseLanguageController.start({
-        scale: 1.1,
-        transition: {
-          ease: "easeOut",
-          duration: 0.2,
-        },
-      });
-    }
-  };
-
   return (
     <div className="flex items-center h-[2rem] rounded-full relative bg-zinc-900 border border-zinc-800 w-[10rem] p-1">
       {languages.map((language) => (
