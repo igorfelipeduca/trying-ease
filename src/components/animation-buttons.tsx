@@ -1,20 +1,18 @@
 "use client";
 
-import { Dispatch, useEffect } from "react";
+import { useEffect } from "react";
 import { motion, useAnimationControls } from "framer-motion";
 import { PlayCircleIcon, RotateCcw } from "lucide-react";
 import { isMobile } from "@/utils/is-mobile";
 
 type AnimationButtonsProps = {
   isAnimationOver: boolean;
-  setIsAnimationOver?: Dispatch<boolean>;
   onPlayAnimation: () => void;
   onResetAnimation: () => void;
 };
 
 export default function AnimationButtons({
   isAnimationOver,
-  setIsAnimationOver,
   onResetAnimation,
   onPlayAnimation,
 }: AnimationButtonsProps) {

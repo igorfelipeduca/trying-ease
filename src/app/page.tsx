@@ -19,7 +19,10 @@ export default function Home() {
               <h2 className="text-xl px-4 sm:px-0 sm:max-w-[40rem] text-center font-medium text-zinc-500 tracking-[-5%]">
                 Experimenting with different types of eases. Using default ones
                 and custom ones from{" "}
-                <span className="text-zinc-400">"The Ease Blueprint"</span>.
+                <span className="text-zinc-400">
+                  &quot;The Ease Blueprint&quot;
+                </span>
+                .
               </h2>
             </div>
           </div>
