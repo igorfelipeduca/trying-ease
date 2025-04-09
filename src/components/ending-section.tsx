@@ -1,5 +1,4 @@
 "use client";
-import { motion, useAnimationControls } from "framer-motion";
 import LinkText from "./link-text";
 
 export default function EndingSection() {
