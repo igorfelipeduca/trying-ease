@@ -1,0 +1,86 @@
+"use client";
+
+import { Dispatch, useEffect } from "react";
+import { motion, useAnimationControls } from "framer-motion";
+import { PlayCircleIcon, RotateCcw } from "lucide-react";
+import { isMobile } from "@/utils/is-mobile";
+
+type AnimationButtonsProps = {
+  isAnimationOver: boolean;
+  setIsAnimationOver?: Dispatch<boolean>;
+  onPlayAnimation: () => void;
+  onResetAnimation: () => void;
+};
+
+export default function AnimationButtons({
+  isAnimationOver,
+  setIsAnimationOver,
+  onResetAnimation,
+  onPlayAnimation,
+}: AnimationButtonsProps) {
+  const playButtonAnimationControls = useAnimationControls();
+
+  useEffect(() => {
+    if (isAnimationOver) {
+      playButtonAnimationControls.start({
+        translateX: isMobile() ? 0 : -100,
+        translateY: isMobile() ? -30 : 0,
+        transition: {
+          duration: 0.3,
+          ease: "easeInOut",
+        },
+      });
+    }
+  }, [isAnimationOver]);
+
+  return (
+    <div className="flex flex-col sm:flex-row items-center gap-6 relative">
+      <motion.button
+        type="button"
+        className="py-2 px-4 rounded-full border border-zinc-800 bg-zinc-900 text-white flex items-center justify-center cursor-pointer ease-initial transition-colors duration-300 hover:bg-zinc-800 font-medium text-md sm:text-lg gap-x-2 w-fit"
+        onClick={onPlayAnimation}
+        whileTap={{
+          scale: 1.1,
+          transition: {
+            duration: 1,
+            ease: "easeOut",
+          },
+        }}
+        animate={playButtonAnimationControls}
+      >
+        <PlayCircleIcon className="size-5" />
+        Play Animation
+      </motion.button>
+
+      {isAnimationOver && (
+        <motion.button
+          type="button"
+          className="py-2 px-4 rounded-full border border-zinc-800 bg-zinc-100 text-black flex items-center justify-center cursor-pointer ease-initial transition-colors duration-300 hover:bg-zinc-300 font-medium text-md sm:text-lg whitespace-nowrap gap-x-2 w-fit absolute sm:-right-[7rem]"
+          initial={{
+            opacity: 0,
+          }}
+          whileTap={{
+            scale: 1.1,
+            transition: {
+              duration: 1,
+              ease: "easeOut",
+            },
+          }}
+          animate={{
+            opacity: 1,
+            translateY: isMobile() ? 30 : 0,
+            transition: {
+              duration: 0.2,
+              delay: 0.3,
+              ease: "easeOut",
+            },
+          }}
+          onClick={onResetAnimation}
+        >
+          <RotateCcw className="size-5" />
+          Reset Animation
+        </motion.button>
+      )}
+    </div>
+  );
+}

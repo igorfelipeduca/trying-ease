@@ -1,103 +1,124 @@
-import Image from "next/image";
+import EndingSection from "@/components/ending-section";
+import Notes from "@/components/notes";
+import Playground from "@/components/playground";
+import Section from "@/components/section";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="px-2 sm:px-64">
+      <div className="border-x border-zinc-900 h-full w-full py-16 flex flex-col gap-y-16">
+        <div className="h-[15rem] flex items-center justify-center">
+          <div className="flex flex-col gap-y-8">
+            <div className="w-full flex justify-center">
+              <h1 className="text-4xl font-bold tracking-[-5%] text-zinc-200">
+                Trying out eases
+              </h1>
+            </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <div className="w-full flex justify-center">
+              <h2 className="text-xl px-4 sm:px-0 sm:max-w-[40rem] text-center font-medium text-zinc-500 tracking-[-5%]">
+                Experimenting with different types of eases. Using default ones
+                and custom ones from{" "}
+                <span className="text-zinc-400">"The Ease Blueprint"</span>.
+              </h2>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+
+        <Section title="Ease Initial" cssTerms={["ease"]}>
+          <Notes
+            notes={[
+              {
+                text: "Should only be used for linear animations",
+              },
+              {
+                text: "The default ease for CSS animations",
+              },
+              {
+                text: "Tipically used for linear animations, such as loader spins or brand logos",
+              },
+            ]}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+
+          {/* The ease property is not necessary since "ease" is the default option for CSS animations */}
+          <Playground />
+        </Section>
+
+        <Section title="Ease In" cssTerms={["ease-in", "easeIn"]}>
+          <Notes
+            notes={[
+              {
+                text: "Should be avoided. It usually makes the website feel slower because of the delay to complete the initial interaction.",
+              },
+              {
+                text: "There are no optimal use cases for this ease. There are plenty better options to use.",
+              },
+              {
+                text: "Creates an unnatural feeling of acceleration that can make interfaces feel sluggish and unresponsive.",
+              },
+              {
+                text: "The slow start makes it difficult for users to predict when the animation will complete.",
+              },
+              {
+                text: "Can cause motion sickness in some users due to the sudden acceleration at the end.",
+              },
+            ]}
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
+
+          <Playground ease="easeIn" />
+        </Section>
+
+        <Section title="Ease Out" cssTerms={["ease-out", "easeOut"]}>
+          <Notes
+            notes={[
+              {
+                text: "Perfect for elements entering the screen or expanding, since it starts fast and slows down smoothly at the end.",
+              },
+              {
+                text: "Commonly used for dropdown menus, tooltips, and other UI elements that need to feel responsive.",
+              },
+              {
+                text: "Creates a natural feeling of deceleration that matches user expectations for most interactions.",
+              },
+            ]}
           />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+          <Playground ease="easeOut" />
+        </Section>
+
+        <Section title="Ease In Out" cssTerms={["ease-in-out", "easeInOut"]}>
+          <Notes
+            notes={[
+              {
+                text: "Nice to use when moving components around the page or morphing them into new elements.",
+              },
+              {
+                text: "Great for transitions between states where both the beginning and end should feel smooth.",
+              },
+              {
+                text: "Useful for animations that need to draw attention but shouldn't feel too aggressive.",
+              },
+              {
+                text: "Common in carousels and slideshows where content smoothly transitions between positions.",
+              },
+              {
+                text: "Provides a balanced, natural feel for longer animations where user attention spans the full duration.",
+              },
+            ]}
+          />
+
+          <Playground ease="easeInOut" />
+        </Section>
+
+        <Section
+          title="Thank you for reading!"
+          cssTerms={["thank you", "obrigado", "gracias", "merci"]}
+          headerImage="https://www.duca.dev/pfp.jpg"
+          headerImageAlt="Igor Duca"
+        >
+          <EndingSection />
+        </Section>
+      </div>
     </div>
   );
 }
