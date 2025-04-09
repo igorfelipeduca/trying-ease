@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ease Types Showcase
 
-## Getting Started
+This project demonstrates various animation easing functions using Framer Motion in a Next.js application. It provides interactive playgrounds to visualize the effect of different eases.
 
-First, run the development server:
+## Components
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+This section describes all components located in `src/components/`.
+
+### `Playground.tsx`
+
+The `Playground` component sets up the animation controls and manages the state for a single animation demonstration block. It uses `Block` to display the animation and `AnimationButtons` for control.
+
+```tsx
+import { useAnimationControls } from "framer-motion";
+import { useState } from "react";
+import Block from "./block";
+import AnimationButtons from "./animation-buttons";
+import { isMobile } from "@/utils/is-mobile";
+
+type PlaygroundProps = {
+  ease?: string;
+};
+
+export default function Playground({ ease }: PlaygroundProps) {
+  const blockControl = useAnimationControls();
+  const [isAnimationOver, setIsAnimationOver] = useState(false);
+
+  const onPlayAnimation = () => {
+    blockControl
+      .start({
+        translateX: isMobile() ? 200 :700,
+        rotate: 360,
+        transition: {
+          duration: 3,
+          ease: ease, // The easing function is passed here
+        },
+      })
+      .then(() => {
+        setIsAnimationOver(true);
+      });
+  };
+
+  const onResetAnimation = () => {
+    blockControl.start({
+      translateX: 0,
+      rotate: 0,
+      transition: {
+        duration: 3,
+        ease: ease,
+      },
+    });
+    // Reset state for buttons
+    setIsAnimationOver(false);
+  };
+
+  return (
+    <div className="flex flex-col w-full gap-y-8">
+      <div className="h-[20rem] flex items-center p-4">
+        {/* The Block component receives the animation controls */}
+        <Block animation={blockControl} />
+      </div>
+
+      <div className="w-full flex justify-center">
+        {/* AnimationButtons trigger play/reset */}
+        <AnimationButtons
+          isAnimationOver={isAnimationOver}
+          onPlayAnimation={onPlayAnimation}
+          onResetAnimation={onResetAnimation}
+        />
+      </div>
+    </div>
+  );
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### `Block.tsx`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The `Block` component is the visual element that gets animated. It simply receives animation controls via props from its parent (`Playground`).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```tsx
+import { AnimationControls, motion } from "framer-motion";
 
-## Learn More
+type BlockProps = {
+  animation: AnimationControls;
+};
 
-To learn more about Next.js, take a look at the following resources:
+export default function Block({ animation }: BlockProps) {
+  return (
+    <motion.div
+      animate={animation} // Applies the animations controlled by the parent
+      className="w-[3rem] h-[3rem] sm:w-[10rem] sm:h-[10rem] bg-zinc-200 rounded-md sm:rounded-[2rem]"
+    />
+  );
+}
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### `AnimationButtons.tsx`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Provides UI controls (`Play`, `Reset`) for the animations within a `Playground`. It handles its own internal animation for positioning the buttons based on the animation state.
 
-## Deploy on Vercel
+### `LinkText.tsx`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+An animated link component. It displays text with an external link icon and features an underline animation on hover.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### `Section.tsx`
+
+A structural component used to wrap and organize content on the page. It displays a title, related CSS terms (passed as props), and an optional header image. It renders any children passed to it.
+
+### `Notes.tsx`
+
+Displays a list of notes provided via props. Each note is rendered as a list item with a small preceding horizontal line.
+
+### `EndingSection.tsx`
+
+A simple component displaying concluding text for the page, including an external link using the `LinkText` component.
+
+### `play-animation-button.tsx`
+
+This file is currently empty.
+
+## Running Locally
+
+1.  Clone the repository.
+2.  Install dependencies: `yarn install`
+3.  Run the development server: `yarn dev`
