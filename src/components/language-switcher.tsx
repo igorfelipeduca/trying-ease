@@ -40,7 +40,7 @@ export default function LanguageSwitcher() {
     if (lang === "pt-BR") {
       // Moving the notch to the right of the div
       notchAnimationController.start({
-        translateX: "4.5rem",
+        translateX: "4.7rem",
         width: "5rem",
         transition: {
           ease: "easeOut",
@@ -52,7 +52,7 @@ export default function LanguageSwitcher() {
       if (!isMobile()) {
         // Pushing "Português" to the right to center in the notch
         portugueseLanguageController.start({
-          translateX: "0.2rem",
+          translateX: "0rem",
           transition: {
             ease: "easeInOut",
             duration: 0.1,
@@ -62,7 +62,7 @@ export default function LanguageSwitcher() {
     } else {
       // Moving back the notch to the left of the div
       notchAnimationController.start({
-        translateX: "0rem",
+        translateX: "0.2rem",
         width: "4rem",
         transition: {
           ease: "easeInOut",
@@ -119,7 +119,7 @@ export default function LanguageSwitcher() {
       <motion.div
         animate={notchAnimationController}
         initial={{
-          left: "0.2rem",
+          left: "0",
         }}
         className="h-[1.6rem] w-[4rem] rounded-full bg-zinc-800 absolute"
       />
