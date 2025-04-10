@@ -1,9 +1,11 @@
 "use client";
 
+import { AnimationChart } from "@/components/animation-chart";
 import Badge from "@/components/badge";
 import EndingSection from "@/components/ending-section";
 import LanguageSwitcher from "@/components/language-switcher";
 import LinkText from "@/components/link-text";
+import MapLocationComponent from "@/components/map-location-component";
 import Notes from "@/components/notes";
 import Playground from "@/components/playground";
 import Section from "@/components/section";
@@ -11,14 +13,14 @@ import { useLanguage } from "@/utils/i18n/language-context";
 
 export default function Home() {
   const { t } = useLanguage();
-  
+
   return (
-    <div className="px-2 sm:px-64">
+    <div className="px-2 sm:px-64 dark">
       <div className="border-x border-zinc-900 h-full w-full py-16 flex flex-col gap-y-16">
         <div className="h-[15rem] flex items-center justify-center">
           <div className="flex flex-col gap-y-8">
             <div className="w-full flex flex-col justify-center items-center gap-6">
-             <LanguageSwitcher />
+              <LanguageSwitcher />
 
               <h1 className="text-3xl sm:text-4xl font-bold tracking-[-5%] text-zinc-200">
                 {t("title")}
@@ -55,13 +57,13 @@ export default function Home() {
                   </span>
                 </div>
               </Badge>
-              
             </div>
           </div>
         </div>
 
         <Section title={t("easeInitialTitle")} cssTerms={["ease"]}>
           <Notes
+            title={t("notes")}
             notes={[
               {
                 text: t("easeInitialNote1"),
@@ -75,12 +77,20 @@ export default function Home() {
             ]}
           />
 
-          {/* The ease property is not necessary since "ease" is the default option for CSS animations */}
+          {/* Linear easing: f(x) = x */}
+          {/* Returns the same value that was passed in, creating a linear progression */}
           <Playground />
+
+          <AnimationChart
+            title="Ease Initial"
+            description="Linear progression over time (no easing)"
+            easingFn={(x) => x}
+          />
         </Section>
 
         <Section title={t("easeInTitle")} cssTerms={["ease-in", "easeIn"]}>
           <Notes
+            title={t("notes")}
             notes={[
               {
                 text: t("easeInNote1"),
@@ -100,11 +110,20 @@ export default function Home() {
             ]}
           />
 
+          {/* Ease In: f(x) = x^2 */}
+          {/* Squares the input, creating a slow start that accelerates */}
           <Playground ease="easeIn" />
+
+          <AnimationChart
+            title="Ease In"
+            description="Starts slow, ends fast"
+            easingFn={(x) => x * x}
+          />
         </Section>
 
         <Section title={t("easeOutTitle")} cssTerms={["ease-out", "easeOut"]}>
           <Notes
+            title={t("notes")}
             notes={[
               {
                 text: t("easeOutNote1"),
@@ -118,11 +137,23 @@ export default function Home() {
             ]}
           />
 
+          {/* Ease Out: f(x) = 1 - (1-x)^2 */}
+          {/* Inverts ease-in, creating a fast start that decelerates */}
           <Playground ease="easeOut" />
+
+          <AnimationChart
+            title="Ease Out"
+            description="Starts fast, ends slow"
+            easingFn={(x) => 1 - Math.pow(1 - x, 2)}
+          />
         </Section>
 
-        <Section title={t("easeInOutTitle")} cssTerms={["ease-in-out", "easeInOut"]}>
+        <Section
+          title={t("easeInOutTitle")}
+          cssTerms={["ease-in-out", "easeInOut"]}
+        >
           <Notes
+            title={t("notes")}
             notes={[
               {
                 text: t("easeInOutNote1"),
@@ -142,7 +173,59 @@ export default function Home() {
             ]}
           />
 
+          {/* Ease In Out: Combines ease-in for first half and ease-out for second half */}
+          {/* For x < 0.5: f(x) = 2x^2 */}
+          {/* For x >= 0.5: f(x) = 1 - (-2x + 2)^2 / 2 */}
           <Playground ease="easeInOut" />
+
+          <AnimationChart
+            title="Ease In Out"
+            description="Starts slow, speeds up in the middle, ends slow"
+            easingFn={(x) =>
+              x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2
+            }
+          />
+        </Section>
+
+        <Section
+          title={t("springAnimationTitle")}
+          cssTerms={["spring animations"]}
+        >
+          <Notes
+            title={t("notes")}
+            notes={[
+              {
+                text: t("sprintAnimationNote1"),
+              },
+            ]}
+          />
+
+          <div className="w-full flex justify-center pt-16 pb-6">
+            <MapLocationComponent />
+          </div>
+
+          <AnimationChart
+            title="Spring"
+            description="Oscillates with damping and stiffness"
+            easingFn={(x) => {
+              const damping = 30;
+              const stiffness = 300;
+              const restDelta = 0.001;
+
+              // Spring physics simulation
+              let velocity = 0;
+              let position = 0;
+              const dt = 1 / 60; // 60fps simulation
+
+              for (let t = 0; t < x; t += dt) {
+                const force = -stiffness * (position - 1) - damping * velocity;
+                velocity += force * dt;
+                position += velocity * dt;
+              }
+
+              return position;
+            }}
+          />
         </Section>
 
         <Section

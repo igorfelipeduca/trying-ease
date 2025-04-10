@@ -45,9 +45,7 @@ export default function RootLayout({
   return (
     <html>
       <body className={`${geistSans.className} antialiased`}>
-        <LanguageProvider>
-          {children}
-        </LanguageProvider>
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );

@@ -52,7 +52,6 @@ export default function LanguageSwitcher() {
       if (!isMobile()) {
         // Pushing "Português" to the right to center in the notch
         portugueseLanguageController.start({
-          translateX: "0.2rem",
           transition: {
             ease: "easeInOut",
             duration: 0.1,
