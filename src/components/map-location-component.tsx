@@ -1,6 +1,5 @@
 "use client";
 
-import { isMobile } from "@/utils/is-mobile";
 import { motion, Spring, useAnimationControls, useSpring } from "framer-motion";
 import { Navigation, TrainIcon } from "lucide-react";
 import { useState } from "react";
@@ -69,11 +68,12 @@ export default function MapLocationComponent() {
     });
 
     imageController.start({
+      translateY: isExpanded ? "-1%" : "0%",
       borderBottomLeftRadius: isExpanded ? 64 : 32,
       borderBottomRightRadius: isExpanded ? 64 : 32,
       transition: {
         duration: 0.3,
-        ease: "easeInOut",
+        ease: [0.76, 0, 0.24, 1],
       },
     });
 
@@ -101,27 +101,42 @@ export default function MapLocationComponent() {
     <div className="flex w-full justify-center relative">
       <motion.div
         className="w-[19rem] sm:w-[30rem] flex items-start rounded-[4rem] absolute top-[5px]"
-        onClick={() => {
-          if (isMobile()) {
-            handleClick();
-          }
-        }}
+        onClick={handleClick}
       >
-        <motion.img
-          src={
-            "https://images.unsplash.com/photo-1569345513487-4db184d98963?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          }
-          alt="Sequoia"
-          className="h-full max-h-[18rem] w-full object-cover shadow-xl shadow-black/20"
-          height={1920}
-          width={1080}
+        <motion.div
+          className="w-full h-[18rem] overflow-hidden"
           initial={{
             borderRadius: 64,
-            borderBottomLeftRadius: 64,
-            borderBottomRightRadius: 64,
           }}
-          animate={imageController}
-        />
+          animate={{
+            borderBottomLeftRadius: isExpanded ? 32 : 64,
+            borderBottomRightRadius: isExpanded ? 32 : 64,
+            transition: {
+              duration: 0.3,
+              ease: [0.76, 0, 0.24, 1],
+            },
+          }}
+        >
+          <motion.img
+            src={
+              "https://images.unsplash.com/photo-1569345513487-4db184d98963?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            }
+            alt="Sequoia"
+            className="h-[24rem] w-full object-cover shadow-xl shadow-black/20"
+            height={1920}
+            width={1080}
+            initial={{
+              y: 0,
+            }}
+            animate={{
+              y: isExpanded ? -100 : 0,
+              transition: {
+                duration: 0.8,
+                ease: [0.76, 0, 0.24, 1],
+              },
+            }}
+          />
+        </motion.div>
 
         <motion.div
           className="absolute left-8 w-full flex flex-col gap-y-2 sm:flex-row items-center justify-between z-5 pr-16"
@@ -143,6 +158,13 @@ export default function MapLocationComponent() {
             className="bg-zinc-800/80 font-medium py-2 px-4 rounded-full justify-center text-white gap-x-2 cursor-pointer transition-colors duration-250 hover:bg-zinc-800/90 items-center text-lg outline-none hidden sm:flex"
             animate={navigationController}
             onClick={handleClick}
+            whileTap={{
+              scale: 1.1,
+              transition: {
+                ease: "easeOut",
+                duration: 0.3,
+              },
+            }}
           >
             <Navigation className="text-white fill-white size-4" />
             Directions

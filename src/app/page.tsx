@@ -210,7 +210,6 @@ export default function Home() {
             easingFn={(x) => {
               const damping = 30;
               const stiffness = 300;
-              const restDelta = 0.001;
 
               // Spring physics simulation
               let velocity = 0;
