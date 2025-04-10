@@ -3,12 +3,7 @@
 import { motion, Spring, useAnimationControls, useSpring } from "framer-motion";
 import { Navigation, TrainIcon } from "lucide-react";
 import { useState } from "react";
-
-type Direction = {
-  name: string;
-  icon: React.ReactNode;
-  time: number; // in seconds
-};
+import LocationBadge, { Location } from "./location-badge";
 
 const spring: Spring = {
   type: "spring",
@@ -17,37 +12,116 @@ const spring: Spring = {
   restDelta: 0.001,
 };
 
-const directions: Direction[] = [
+const locations: Location[] = [
   {
-    name: "Walking",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="32"
-        height="32"
-        viewBox="0 0 16 16"
-        fill="currentColor"
-        className="text-zinc-800 size-5"
-      >
-        <path d="M9.5 1.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0M6.44 3.752A.75.75 0 0 1 7 3.5h1.445c.742 0 1.32.643 1.243 1.38l-.43 4.083a1.8 1.8 0 0 1-.088.395l-.318.906l.213.242a.8.8 0 0 1 .114.175l2 4.25a.75.75 0 1 1-1.357.638l-1.956-4.154l-1.68-1.921A.75.75 0 0 1 6 8.96l.138-2.613l-.435.489l-.464 2.786a.75.75 0 1 1-1.48-.246l.5-3a.75.75 0 0 1 .18-.375l2-2.25Z" />
-        <path d="M6.25 11.745v-1.418l1.204 1.375l.261.524a.8.8 0 0 1-.12.231l-2.5 3.25a.75.75 0 1 1-1.19-.914zm4.22-4.215l-.494-.494l.205-1.843l.006-.067l1.124 1.124h1.44a.75.75 0 0 1 0 1.5H11a.75.75 0 0 1-.531-.22Z" />
-      </svg>
-    ),
-    time: 3840,
+    name: "Sequoia Natural Park",
+    location: "California",
+    imageSrc:
+      "https://images.unsplash.com/photo-1569345513487-4db184d98963?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    directions: [
+      {
+        name: "Walking",
+        icon: (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            className="text-zinc-800 size-5"
+          >
+            <path d="M9.5 1.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0M6.44 3.752A.75.75 0 0 1 7 3.5h1.445c.742 0 1.32.643 1.243 1.38l-.43 4.083a1.8 1.8 0 0 1-.088.395l-.318.906l.213.242a.8.8 0 0 1 .114.175l2 4.25a.75.75 0 1 1-1.357.638l-1.956-4.154l-1.68-1.921A.75.75 0 0 1 6 8.96l.138-2.613l-.435.489l-.464 2.786a.75.75 0 1 1-1.48-.246l.5-3a.75.75 0 0 1 .18-.375l2-2.25Z" />
+            <path d="M6.25 11.745v-1.418l1.204 1.375l.261.524a.8.8 0 0 1-.12.231l-2.5 3.25a.75.75 0 1 1-1.19-.914zm4.22-4.215l-.494-.494l.205-1.843l.006-.067l1.124 1.124h1.44a.75.75 0 0 1 0 1.5H11a.75.75 0 0 1-.531-.22Z" />
+          </svg>
+        ),
+        time: 3840,
+      },
+      {
+        name: "Visalia Station",
+        icon: <TrainIcon className="size-5 text-zinc-800" />,
+        time: 2880,
+      },
+      {
+        name: "Fresno Station",
+        icon: <TrainIcon className="size-5 text-zinc-800" />,
+        time: 3600,
+      },
+    ],
   },
   {
-    name: "Visalia Station",
-    icon: <TrainIcon className="size-5 text-zinc-800" />,
-    time: 2880,
+    name: "Yosemite Valley",
+    location: "California",
+    imageSrc:
+      "https://images.unsplash.com/photo-1562310503-a918c4c61e38?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3",
+    directions: [
+      {
+        name: "Walking",
+        icon: (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            className="text-zinc-800 size-5"
+          >
+            <path d="M9.5 1.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0M6.44 3.752A.75.75 0 0 1 7 3.5h1.445c.742 0 1.32.643 1.243 1.38l-.43 4.083a1.8 1.8 0 0 1-.088.395l-.318.906l.213.242a.8.8 0 0 1 .114.175l2 4.25a.75.75 0 1 1-1.357.638l-1.956-4.154l-1.68-1.921A.75.75 0 0 1 6 8.96l.138-2.613l-.435.489l-.464 2.786a.75.75 0 1 1-1.48-.246l.5-3a.75.75 0 0 1 .18-.375l2-2.25Z" />
+            <path d="M6.25 11.745v-1.418l1.204 1.375l.261.524a.8.8 0 0 1-.12.231l-2.5 3.25a.75.75 0 1 1-1.19-.914zm4.22-4.215l-.494-.494l.205-1.843l.006-.067l1.124 1.124h1.44a.75.75 0 0 1 0 1.5H11a.75.75 0 0 1-.531-.22Z" />
+          </svg>
+        ),
+        time: 4200,
+      },
+      {
+        name: "Merced Station",
+        icon: <TrainIcon className="size-5 text-zinc-800" />,
+        time: 3120,
+      },
+      {
+        name: "Yosemite Valley Station",
+        icon: <TrainIcon className="size-5 text-zinc-800" />,
+        time: 2400,
+      },
+    ],
   },
   {
-    name: "Fresno Station",
-    icon: <TrainIcon className="size-5 text-zinc-800" />,
-    time: 3600,
+    name: "Death Valley",
+    location: "California",
+    imageSrc:
+      "https://images.unsplash.com/photo-1607101435453-e6a1327f1c73?q=80&w=3271&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    directions: [
+      {
+        name: "Walking",
+        icon: (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            className="text-zinc-800 size-5"
+          >
+            <path d="M9.5 1.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0M6.44 3.752A.75.75 0 0 1 7 3.5h1.445c.742 0 1.32.643 1.243 1.38l-.43 4.083a1.8 1.8 0 0 1-.088.395l-.318.906l.213.242a.8.8 0 0 1 .114.175l2 4.25a.75.75 0 1 1-1.357.638l-1.956-4.154l-1.68-1.921A.75.75 0 0 1 6 8.96l.138-2.613l-.435.489l-.464 2.786a.75.75 0 1 1-1.48-.246l.5-3a.75.75 0 0 1 .18-.375l2-2.25Z" />
+            <path d="M6.25 11.745v-1.418l1.204 1.375l.261.524a.8.8 0 0 1-.12.231l-2.5 3.25a.75.75 0 1 1-1.19-.914zm4.22-4.215l-.494-.494l.205-1.843l.006-.067l1.124 1.124h1.44a.75.75 0 0 1 0 1.5H11a.75.75 0 0 1-.531-.22Z" />
+          </svg>
+        ),
+        time: 5400,
+      },
+      {
+        name: "Ridgecrest Station",
+        icon: <TrainIcon className="size-5 text-zinc-800" />,
+        time: 3600,
+      },
+      {
+        name: "Death Valley Junction",
+        icon: <TrainIcon className="size-5 text-zinc-800" />,
+        time: 2700,
+      },
+    ],
   },
 ];
 
 export default function MapLocationComponent() {
+  const [selectedLocation, setSelectedLocation] = useState(locations[0]);
   const [isExpanded, setIsExpanded] = useState(false);
   const whiteBackgroundHeight = useSpring(298, spring);
   const textPositionController = useAnimationControls();
@@ -56,7 +130,9 @@ export default function MapLocationComponent() {
   const navigationController = useAnimationControls();
 
   const handleClick = () => {
-    whiteBackgroundHeight.set(isExpanded ? 298 : 490 + 20 * directions.length);
+    whiteBackgroundHeight.set(
+      isExpanded ? 298 : 490 + 20 * selectedLocation.directions.length
+    );
 
     textPositionController.start({
       translateY: isExpanded ? 0 : 105,
@@ -97,137 +173,153 @@ export default function MapLocationComponent() {
     setIsExpanded(!isExpanded);
   };
 
+  const onChangeLocation = (location: Location) => {
+    setSelectedLocation(location);
+  };
+
   return (
-    <div className="flex w-full justify-center relative">
-      <motion.div
-        className="w-[19rem] sm:w-[30rem] flex items-start rounded-[4rem] absolute top-[5px]"
-        onClick={handleClick}
-      >
+    <div className="flex flex-col gap-y-16">
+      <div className="flex items-center gap-x-4">
+        {locations.map((location, index) => (
+          <LocationBadge
+            location={location}
+            key={index}
+            onChangeLocation={onChangeLocation}
+          />
+        ))}
+      </div>
+
+      <div className="flex w-full justify-center relative">
         <motion.div
-          className="w-full h-[18rem] overflow-hidden"
-          initial={{
-            borderRadius: 64,
-          }}
-          animate={{
-            borderBottomLeftRadius: isExpanded ? 32 : 64,
-            borderBottomRightRadius: isExpanded ? 32 : 64,
-            transition: {
-              duration: 0.3,
-              ease: [0.76, 0, 0.24, 1],
-            },
-          }}
+          className="w-[19rem] sm:w-[30rem] flex items-start rounded-[4rem] absolute top-[5px]"
+          onClick={handleClick}
         >
-          <motion.img
-            src={
-              "https://images.unsplash.com/photo-1569345513487-4db184d98963?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            }
-            alt="Sequoia"
-            className="h-[24rem] w-full object-cover shadow-xl shadow-black/20"
-            height={1920}
-            width={1080}
+          <motion.div
+            className="w-full h-[18rem] overflow-hidden"
             initial={{
-              y: 0,
+              borderRadius: 64,
             }}
             animate={{
-              y: isExpanded ? -100 : 0,
+              borderBottomLeftRadius: isExpanded ? 32 : 64,
+              borderBottomRightRadius: isExpanded ? 32 : 64,
               transition: {
-                duration: 0.8,
+                duration: 0.3,
                 ease: [0.76, 0, 0.24, 1],
               },
             }}
-          />
+          >
+            <motion.img
+              src={selectedLocation.imageSrc}
+              alt={`${selectedLocation.name}, ${selectedLocation.location}`}
+              className="h-[24rem] w-full object-cover shadow-xl shadow-black/20"
+              height={1920}
+              width={1080}
+              initial={{
+                y: 0,
+              }}
+              animate={{
+                y: isExpanded ? -100 : 0,
+                transition: {
+                  duration: 0.8,
+                  ease: [0.76, 0, 0.24, 1],
+                },
+              }}
+            />
+          </motion.div>
+
+          <motion.div
+            className="absolute left-8 w-full flex flex-col gap-y-2 sm:flex-row items-center justify-between z-5 pr-16"
+            initial={{
+              bottom: 32,
+            }}
+          >
+            <motion.div
+              className="flex flex-col self-start sm:self-auto items-start"
+              animate={textPositionController}
+            >
+              <h3 className="font-semibold text-white text-xl tracking-[-5%] capitalize">
+                {selectedLocation.name}
+              </h3>
+              <h3 className="text-zinc-300 text-xl tracking-[-5%]">
+                {selectedLocation.location}
+              </h3>
+            </motion.div>
+
+            <motion.button
+              className="bg-zinc-800/80 font-medium py-2 px-4 rounded-full justify-center text-white gap-x-2 cursor-pointer transition-colors duration-250 hover:bg-zinc-800/90 items-center text-lg outline-none hidden sm:flex"
+              animate={navigationController}
+              onClick={handleClick}
+              whileTap={{
+                scale: 1.1,
+                transition: {
+                  ease: "easeOut",
+                  duration: 0.3,
+                },
+              }}
+            >
+              <Navigation className="text-white fill-white size-4" />
+              Directions
+            </motion.button>
+          </motion.div>
+
+          <motion.div className="absolute w-full flex justify-center bottom-0 left-[2px] pr-[5px]">
+            <motion.div
+              animate={gradientController}
+              initial={{
+                borderBottomRightRadius: 64,
+                borderBottomLeftRadius: 64,
+              }}
+              className="w-full h-[15rem] bg-gradient-to-t from-[#0C0A04] via-[#0C0A04/70] to-[#0C0A04/10] max-h-[18rem]"
+            />
+          </motion.div>
+
+          {isExpanded && (
+            <motion.div className="absolute top-96 w-full pl-4">
+              <div className="flex flex-col gap-y-6 w-full pl-4 pr-10">
+                {selectedLocation.directions.map((direction, index) => (
+                  <motion.div
+                    className="flex items-center gap-x-2 justify-between"
+                    key={index}
+                    initial={{
+                      opacity: 0,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      transition: {
+                        duration: 0.5,
+                        delay: 0.1 + index * 0.2,
+                        ease: "easeInOut",
+                      },
+                    }}
+                  >
+                    <div className="flex items-center gap-x-2">
+                      {direction.icon}
+
+                      <span className="text-lg font-medium text-zinc-800">
+                        {direction.name}
+                      </span>
+                    </div>
+
+                    <span className="text-lg font-medium text-zinc-800">
+                      {new Date(
+                        Date.now() + direction.time * 1000
+                      ).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
         </motion.div>
 
         <motion.div
-          className="absolute left-8 w-full flex flex-col gap-y-2 sm:flex-row items-center justify-between z-5 pr-16"
-          initial={{
-            bottom: 32,
-          }}
-        >
-          <motion.div
-            className="flex flex-col self-start sm:self-auto items-start"
-            animate={textPositionController}
-          >
-            <h3 className="font-semibold text-white text-xl tracking-[-5%] capitalize">
-              Sequoia Natural Park,
-            </h3>
-            <h3 className="text-zinc-300 text-xl tracking-[-5%]">California</h3>
-          </motion.div>
-
-          <motion.button
-            className="bg-zinc-800/80 font-medium py-2 px-4 rounded-full justify-center text-white gap-x-2 cursor-pointer transition-colors duration-250 hover:bg-zinc-800/90 items-center text-lg outline-none hidden sm:flex"
-            animate={navigationController}
-            onClick={handleClick}
-            whileTap={{
-              scale: 1.1,
-              transition: {
-                ease: "easeOut",
-                duration: 0.3,
-              },
-            }}
-          >
-            <Navigation className="text-white fill-white size-4" />
-            Directions
-          </motion.button>
-        </motion.div>
-
-        <motion.div className="absolute w-full flex justify-center bottom-0 left-[2px] pr-[5px]">
-          <motion.div
-            animate={gradientController}
-            initial={{
-              borderBottomRightRadius: 64,
-              borderBottomLeftRadius: 64,
-            }}
-            className="w-full h-[15rem] bg-gradient-to-t from-[#0C0A04] via-[#0C0A04/70] to-[#0C0A04/10] max-h-[18rem]"
-          />
-        </motion.div>
-
-        {isExpanded && (
-          <motion.div className="absolute top-96 w-full pl-4">
-            <div className="flex flex-col gap-y-6 w-full pl-4 pr-10">
-              {directions.map((direction, index) => (
-                <motion.div
-                  className="flex items-center gap-x-2 justify-between"
-                  key={index}
-                  initial={{
-                    opacity: 0,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    transition: {
-                      duration: 0.5,
-                      delay: 0.1 + index * 0.2,
-                      ease: "easeInOut",
-                    },
-                  }}
-                >
-                  <div className="flex items-center gap-x-2">
-                    {direction.icon}
-
-                    <span className="text-lg font-medium text-zinc-800">
-                      {direction.name}
-                    </span>
-                  </div>
-
-                  <span className="text-lg font-medium text-zinc-800">
-                    {new Date(
-                      Date.now() + direction.time * 1000
-                    ).toLocaleTimeString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </motion.div>
-
-      <motion.div
-        className="bg-white rounded-[4.2rem] w-[30.6rem]"
-        style={{ height: whiteBackgroundHeight }}
-      />
+          className="bg-white rounded-[4.2rem] w-[30.6rem]"
+          style={{ height: whiteBackgroundHeight }}
+        />
+      </div>
     </div>
   );
 }
