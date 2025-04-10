@@ -1,26 +1,33 @@
+"use client";
+
 import Badge from "@/components/badge";
 import EndingSection from "@/components/ending-section";
+import LanguageSwitcher from "@/components/language-switcher";
 import LinkText from "@/components/link-text";
 import Notes from "@/components/notes";
 import Playground from "@/components/playground";
 import Section from "@/components/section";
+import { useLanguage } from "@/utils/i18n/language-context";
 
 export default function Home() {
+  const { t } = useLanguage();
+  
   return (
     <div className="px-2 sm:px-64">
       <div className="border-x border-zinc-900 h-full w-full py-16 flex flex-col gap-y-16">
         <div className="h-[15rem] flex items-center justify-center">
           <div className="flex flex-col gap-y-8">
-            <div className="w-full flex justify-center">
-              <h1 className="text-4xl font-bold tracking-[-5%] text-zinc-200">
-                Trying out eases
+            <div className="w-full flex flex-col justify-center items-center gap-6">
+             <LanguageSwitcher />
+
+              <h1 className="text-3xl sm:text-4xl font-bold tracking-[-5%] text-zinc-200">
+                {t("title")}
               </h1>
             </div>
 
             <div className="w-full flex justify-center">
               <h2 className="text-xl px-4 sm:px-0 sm:max-w-[40rem] text-center font-medium text-zinc-500 tracking-[-5%]">
-                Experimenting with different types of eases. Implement default easing presets from CSS
-                and custom presets from{" "}
+                {t("subtitle")}{" "}
                 <LinkText
                   text={'"The Easing Blueprint"'}
                   href="https://www.reubence.com/articles/the-easing-blueprint"
@@ -29,7 +36,7 @@ export default function Home() {
               </h2>
             </div>
 
-            <div className="w-full flex justify-center">
+            <div className="w-full flex justify-center gap-4">
               <Badge href="https://github.com/igorfelipeduca/trying-ease">
                 <div className="flex items-center gap-x-2">
                   <svg
@@ -44,25 +51,26 @@ export default function Home() {
                   </svg>
 
                   <span className="font-semibold tracking-[-3%]">
-                    This project is Open Source!
+                    {t("openSource")}
                   </span>
                 </div>
               </Badge>
+              
             </div>
           </div>
         </div>
 
-        <Section title="Ease Initial" cssTerms={["ease"]}>
+        <Section title={t("easeInitialTitle")} cssTerms={["ease"]}>
           <Notes
             notes={[
               {
-                text: "Should only be used for linear animations",
+                text: t("easeInitialNote1"),
               },
               {
-                text: "The default ease for CSS animations",
+                text: t("easeInitialNote2"),
               },
               {
-                text: "Tipically used for linear animations, such as loader spins or brand logos",
+                text: t("easeInitialNote3"),
               },
             ]}
           />
@@ -71,23 +79,23 @@ export default function Home() {
           <Playground />
         </Section>
 
-        <Section title="Ease In" cssTerms={["ease-in", "easeIn"]}>
+        <Section title={t("easeInTitle")} cssTerms={["ease-in", "easeIn"]}>
           <Notes
             notes={[
               {
-                text: "Should be avoided. It usually makes the website feel slower because of the delay to complete the initial interaction.",
+                text: t("easeInNote1"),
               },
               {
-                text: "There are no optimal use cases for this ease. There are plenty better options to use.",
+                text: t("easeInNote2"),
               },
               {
-                text: "Creates an unnatural feeling of acceleration that can make interfaces feel sluggish and unresponsive.",
+                text: t("easeInNote3"),
               },
               {
-                text: "The slow start makes it difficult for users to predict when the animation will complete.",
+                text: t("easeInNote4"),
               },
               {
-                text: "Can cause motion sickness in some users due to the sudden acceleration at the end.",
+                text: t("easeInNote5"),
               },
             ]}
           />
@@ -95,17 +103,17 @@ export default function Home() {
           <Playground ease="easeIn" />
         </Section>
 
-        <Section title="Ease Out" cssTerms={["ease-out", "easeOut"]}>
+        <Section title={t("easeOutTitle")} cssTerms={["ease-out", "easeOut"]}>
           <Notes
             notes={[
               {
-                text: "Perfect for elements entering the screen or expanding, since it starts fast and slows down smoothly at the end.",
+                text: t("easeOutNote1"),
               },
               {
-                text: "Commonly used for dropdown menus, tooltips, and other UI elements that need to feel responsive.",
+                text: t("easeOutNote2"),
               },
               {
-                text: "Creates a natural feeling of deceleration that matches user expectations for most interactions.",
+                text: t("easeOutNote3"),
               },
             ]}
           />
@@ -113,23 +121,23 @@ export default function Home() {
           <Playground ease="easeOut" />
         </Section>
 
-        <Section title="Ease In Out" cssTerms={["ease-in-out", "easeInOut"]}>
+        <Section title={t("easeInOutTitle")} cssTerms={["ease-in-out", "easeInOut"]}>
           <Notes
             notes={[
               {
-                text: "Nice to use when moving components around the page or morphing them into new elements.",
+                text: t("easeInOutNote1"),
               },
               {
-                text: "Great for transitions between states where both the beginning and end should feel smooth.",
+                text: t("easeInOutNote2"),
               },
               {
-                text: "Useful for animations that need to draw attention but shouldn't feel too aggressive.",
+                text: t("easeInOutNote3"),
               },
               {
-                text: "Common in carousels and slideshows where content smoothly transitions between positions.",
+                text: t("easeInOutNote4"),
               },
               {
-                text: "Provides a balanced, natural feel for longer animations where user attention spans the full duration.",
+                text: t("easeInOutNote5"),
               },
             ]}
           />
@@ -138,7 +146,7 @@ export default function Home() {
         </Section>
 
         <Section
-          title="Thank you for reading!"
+          title={t("thankYouTitle")}
           cssTerms={["thank you", "obrigado", "gracias", "merci"]}
           headerImage="https://www.duca.dev/pfp.jpg"
           headerImageAlt="Igor Duca"
