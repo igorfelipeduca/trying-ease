@@ -4,14 +4,7 @@ import { motion, Spring, useAnimationControls, useSpring } from "framer-motion";
 import { Navigation, TrainIcon } from "lucide-react";
 import { useState } from "react";
 import LocationBadge, { Location } from "./location-badge";
-
-const spring: Spring = {
-  type: "spring",
-  damping: 30,
-  stiffness: 300,
-  restDelta: 0.001,
-};
-
+import { springPreset } from "@/utils/spring-preset";
 const locations: Location[] = [
   {
     name: "Sequoia Natural Park",
@@ -123,7 +116,7 @@ const locations: Location[] = [
 export default function MapLocationComponent() {
   const [selectedLocation, setSelectedLocation] = useState(locations[0]);
   const [isExpanded, setIsExpanded] = useState(false);
-  const whiteBackgroundHeight = useSpring(298, spring);
+  const whiteBackgroundHeight = useSpring(298, springPreset);
   const textPositionController = useAnimationControls();
   const imageController = useAnimationControls();
   const gradientController = useAnimationControls();

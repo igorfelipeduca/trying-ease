@@ -28,7 +28,7 @@ export default function LocationBadge({
       onClick={() => {
         onChangeLocation(location);
       }}
-      className="rounded-full py-1 px-2 flex items-center gap-x-2 bg-white transition-colors duration-150 hover:bg-zinc-200 ease-linear cursor-pointer"
+      className="rounded-full py-1 pl-2 pr-4 flex items-center gap-x-2 bg-white transition-colors duration-150 hover:bg-zinc-200 ease-linear cursor-pointer"
     >
       <Image
         src={location.imageSrc}
@@ -38,7 +38,7 @@ export default function LocationBadge({
         alt={`${location.name}, ${location.location}`}
       />
 
-      <span className="text-lg font-medium text-black tracking-[-3%]">
+      <span className="text-md font-medium text-black tracking-[-3%]">
         {location.name}
       </span>
     </button>

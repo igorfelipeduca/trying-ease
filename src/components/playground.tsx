@@ -17,7 +17,7 @@ export default function Playground({ ease }: PlaygroundProps) {
   const onPlayAnimation = () => {
     blockControl
       .start({
-        translateX: isMobile() ? 200 : 700,
+        translateX: isMobile() ? "calc(100vw - 4rem)" : "calc(100vw - 50rem)",
         rotate: 360,
         transition: {
           duration: 3,

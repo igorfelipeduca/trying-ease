@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Special_Elite } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/utils/i18n/language-context";
 

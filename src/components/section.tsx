@@ -6,6 +6,7 @@ type SectionProps = {
   headerImageAlt?: string;
   title: string;
   cssTerms: string[];
+  className?: string;
 };
 
 export default function Section({
@@ -14,9 +15,10 @@ export default function Section({
   children,
   title,
   cssTerms,
+  className,
 }: SectionProps) {
   return (
-    <div className="flex flex-col w-full">
+    <div className={`flex flex-col w-full ${className}`}>
       <div className="w-full h-[1px] bg-zinc-900" />
 
       <div className="flex flex-col gap-y-8 px-8 py-16">

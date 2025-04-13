@@ -32,7 +32,8 @@ export type TranslationKey =
   | "endingText"
   | "notes"
   | "springAnimationTitle"
-  | "sprintAnimationNote1";
+  | "sprintAnimationNote1"
+  | "copyingAppStore";
 
 type TranslationObject = Record<Locale, Record<TranslationKey, string>>;
 
@@ -85,7 +86,9 @@ export const translations: TranslationObject = {
       "This project was created for study purposes. All animations displayed on the website were crafted using framer-motion. If liked this study case and want to keep a close look on other studies of mine, come meet me on",
     notes: "Notes",
     springAnimationTitle: "Spring Animations",
-    sprintAnimationNote1: "Currently it is impossible to build a spring animation using only CSS. Spring animations are different from ease animations in many ways. While ease animations depend on a curve and a duration to exist, spring animations resemble a physical object attached to a spring, so in order to exist, they depend on damping, stiffness and mass, which are the physical properties of the spring movement."
+    sprintAnimationNote1:
+      "Currently it is impossible to build a spring animation using only CSS. Spring animations are different from ease animations in many ways. While ease animations depend on a curve and a duration to exist, spring animations resemble a physical object attached to a spring, so in order to exist, they depend on damping, stiffness and mass, which are the physical properties of the spring movement.",
+    copyingAppStore: "copying some App Store animations",
   },
   "pt-BR": {
     title: "Experimentando eases",
@@ -135,6 +138,8 @@ export const translations: TranslationObject = {
       "Este projeto foi criado para fins de estudo. Todas as animações exibidas no site foram criadas usando framer-motion. Se gostou deste estudo de caso e quer acompanhar outros estudos meus, venha me encontrar no",
     notes: "Anotações",
     springAnimationTitle: "Animações Spring",
-    sprintAnimationNote1: "Atualmente é impossível criar uma animação spring usando apenas CSS. Animações spring são diferentes das animações ease em vários aspectos. Enquanto animações ease dependem de uma curva e uma duração para existir, animações spring se assemelham a um objeto físico preso a uma mola, então para existir, elas dependem de amortecimento, rigidez e massa, que são as propriedades físicas do movimento da mola."
+    sprintAnimationNote1:
+      "Atualmente é impossível criar uma animação spring usando apenas CSS. Animações spring são diferentes das animações ease em vários aspectos. Enquanto animações ease dependem de uma curva e uma duração para existir, animações spring se assemelham a um objeto físico preso a uma mola, então para existir, elas dependem de amortecimento, rigidez e massa, que são as propriedades físicas do movimento da mola.",
+    copyingAppStore: "copiando algumas animações da App Store",
   },
 };

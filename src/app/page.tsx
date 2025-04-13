@@ -1,8 +1,10 @@
 "use client";
 
 import { AnimationChart } from "@/components/animation-chart";
+import ArtComponent from "@/components/art-component";
 import Badge from "@/components/badge";
 import EndingSection from "@/components/ending-section";
+import EssentialApps from "@/components/essential-apps";
 import LanguageSwitcher from "@/components/language-switcher";
 import LinkText from "@/components/link-text";
 import MapLocationComponent from "@/components/map-location-component";
@@ -225,6 +227,33 @@ export default function Home() {
               return position;
             }}
           />
+        </Section>
+
+        <Section
+          title={"Mouse-Aware Animations"}
+          cssTerms={["thank you", "obrigado", "gracias", "merci"]}
+        >
+          <div className="py-8 flex w-full sm:mx-auto justify-center">
+            <ArtComponent />
+          </div>
+        </Section>
+
+        <Section
+          title={"Exploring clip paths"}
+          cssTerms={[t("copyingAppStore")]}
+        >
+          <div className="w-full h-full max-h-[40rem] relative">
+            <EssentialApps />
+          </div>
+        </Section>
+
+        <Section
+          title={t("thankYouTitle")}
+          cssTerms={["thank you", "obrigado", "gracias", "merci"]}
+          headerImage="https://www.duca.dev/pfp.jpg"
+          headerImageAlt="Igor Duca"
+        >
+          <EndingSection />
         </Section>
 
         <Section
