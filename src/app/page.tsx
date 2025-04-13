@@ -255,15 +255,6 @@ export default function Home() {
         >
           <EndingSection />
         </Section>
-
-        <Section
-          title={t("thankYouTitle")}
-          cssTerms={["thank you", "obrigado", "gracias", "merci"]}
-          headerImage="https://www.duca.dev/pfp.jpg"
-          headerImageAlt="Igor Duca"
-        >
-          <EndingSection />
-        </Section>
       </div>
     </div>
   );
