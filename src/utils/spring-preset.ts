@@ -1,6 +1,6 @@
 import { Spring } from "framer-motion";
 
-export let springPreset: Spring = {
+export const springPreset: Spring = {
   type: "spring",
   damping: 30,
   stiffness: 150,

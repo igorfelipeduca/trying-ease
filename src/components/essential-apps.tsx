@@ -64,7 +64,6 @@ export default function EssentialApps() {
 const AppElement = ({ app, index }: { app: App; index: number }) => {
   const [isClicked, setIsClicked] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
-  const [isComplete, setIsComplete] = useState(false);
   const [isFilling, setIsFilling] = useState(false);
   const buttonWidthSpring = useSpring("5rem", springPreset);
   const buttonAnimationControls = useAnimationControls();
@@ -112,8 +111,6 @@ const AppElement = ({ app, index }: { app: App; index: number }) => {
           })
           .then(() => {
             setTimeout(() => {
-              setIsComplete(true);
-
               buttonAnimationControls.start({
                 opacity: 0,
                 transition: springPreset,

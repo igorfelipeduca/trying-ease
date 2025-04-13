@@ -61,9 +61,13 @@ export default function ArtComponent() {
   };
 
   const tiltTransform = `perspective(1000px) rotateY(${
-    (mousePosition as any).centerX ? (mousePosition as any).centerX * 4 : 0
+    (mousePosition as { centerX: number }).centerX
+      ? (mousePosition as { centerX: number }).centerX * 4
+      : 0
   }deg) rotateX(${
-    (mousePosition as any).centerY ? -(mousePosition as any).centerY * 4 : 0
+    (mousePosition as { centerY: number }).centerY
+      ? -(mousePosition as { centerY: number }).centerY * 4
+      : 0
   }deg)`;
 
   return (

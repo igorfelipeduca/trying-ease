@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, Spring, useAnimationControls, useSpring } from "framer-motion";
+import { motion, useAnimationControls, useSpring } from "framer-motion";
 import { Navigation, TrainIcon } from "lucide-react";
 import { useState } from "react";
 import LocationBadge, { Location } from "./location-badge";
