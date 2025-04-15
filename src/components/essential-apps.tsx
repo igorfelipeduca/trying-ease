@@ -52,7 +52,7 @@ export default function EssentialApps() {
         Essential Apps
       </h3>
 
-      <div className="grid grid-cols-2 w-full justify-between gap-6">
+      <div className="flex flex-col sm:grid sm:grid-cols-2 w-full justify-between gap-6">
         {apps.map((app, index) => (
           <AppElement key={index} index={index} app={app} />
         ))}
@@ -123,96 +123,104 @@ const AppElement = ({ app, index }: { app: App; index: number }) => {
 
   return (
     <div
-      className={`flex items-center gap-x-4 justify-between pb-4 ${
+      className={`flex flex-col pb-4 ${
         index + 1 === 5 || index + 1 === 6 ? "" : "border-b border-zinc-800"
       }`}
     >
-      <div className="flex items-center gap-x-4">
-        <Image
-          src={app.icon}
-          height={500}
-          width={500}
-          className="size-16 rounded-xl object-cover bg-white border border-zinc-800"
-          alt={app.name}
-        />
+      <div className={`flex items-center gap-x-4 justify-between pb-4 `}>
+        <div className="flex items-center gap-x-4">
+          <Image
+            src={app.icon}
+            height={500}
+            width={500}
+            className="size-16 rounded-xl object-cover bg-white border border-zinc-800"
+            alt={app.name}
+          />
 
-        <div className="flex flex-col gap-y-2">
-          <h4 className="text-zinc-300 font-medium text-lg">{app.name}</h4>
-          <span className="text-zinc-500 text-md">{app.description}</span>
+          <div className="flex flex-col gap-y-2">
+            <h4 className="text-zinc-300 font-medium text-lg">{app.name}</h4>
+            <span className="text-zinc-500 text-md hidden sm:block">
+              {app.description}
+            </span>
+          </div>
         </div>
+
+        <motion.button
+          type="button"
+          className="rounded-full bg-white flex justify-center text-sm text-blue-500"
+          style={{
+            width: buttonWidthSpring,
+            padding: "0.25rem 2rem",
+          }}
+          onClick={onButtonClick}
+          animate={buttonAnimationControls}
+        >
+          {isClicked ? (
+            <div className="size-7 rounded-full flex justify-center items-center relative">
+              {isSpinning ? (
+                <motion.div
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    border: "2px solid rgb(228 228 231)",
+                    borderBottomColor: "transparent",
+                  }}
+                  animate={{
+                    rotate: 360,
+                  }}
+                  transition={{
+                    duration: 1,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                />
+              ) : (
+                <>
+                  <motion.svg
+                    className="absolute inset-0 size-7 -rotate-90"
+                    animate={loadButtonControls}
+                    initial={{
+                      opacity: 1,
+                    }}
+                  >
+                    <circle
+                      cx="14"
+                      cy="14"
+                      r="13"
+                      strokeWidth="2"
+                      className="fill-none stroke-zinc-600"
+                    />
+                    <motion.circle
+                      cx="14"
+                      cy="14"
+                      r="13"
+                      strokeWidth="2"
+                      className="fill-none stroke-blue-600"
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: isFilling ? [0, 1] : 1 }}
+                      transition={{
+                        duration: 3,
+                        ease: "linear",
+                      }}
+                    />
+                  </motion.svg>
+                  <motion.div
+                    animate={pauseIconControls}
+                    initial={{ opacity: 1, scale: 1 }}
+                  >
+                    <PauseIcon className="size-3 text-blue-600 fill-blue-600 z-10" />
+                  </motion.div>
+                </>
+              )}
+            </div>
+          ) : (
+            "Get"
+          )}
+        </motion.button>
       </div>
 
-      <motion.button
-        type="button"
-        className="rounded-full bg-white flex justify-center text-sm text-blue-500"
-        style={{
-          width: buttonWidthSpring,
-          padding: "0.25rem 2rem",
-        }}
-        onClick={onButtonClick}
-        animate={buttonAnimationControls}
-      >
-        {isClicked ? (
-          <div className="size-7 rounded-full flex justify-center items-center relative">
-            {isSpinning ? (
-              <motion.div
-                className="absolute inset-0 rounded-full"
-                style={{
-                  border: "2px solid rgb(228 228 231)",
-                  borderBottomColor: "transparent",
-                }}
-                animate={{
-                  rotate: 360,
-                }}
-                transition={{
-                  duration: 1,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              />
-            ) : (
-              <>
-                <motion.svg
-                  className="absolute inset-0 size-7 -rotate-90"
-                  animate={loadButtonControls}
-                  initial={{
-                    opacity: 1,
-                  }}
-                >
-                  <circle
-                    cx="14"
-                    cy="14"
-                    r="13"
-                    strokeWidth="2"
-                    className="fill-none stroke-zinc-600"
-                  />
-                  <motion.circle
-                    cx="14"
-                    cy="14"
-                    r="13"
-                    strokeWidth="2"
-                    className="fill-none stroke-blue-600"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: isFilling ? [0, 1] : 1 }}
-                    transition={{
-                      duration: 3,
-                      ease: "linear",
-                    }}
-                  />
-                </motion.svg>
-                <motion.div
-                  animate={pauseIconControls}
-                  initial={{ opacity: 1, scale: 1 }}
-                >
-                  <PauseIcon className="size-3 text-blue-600 fill-blue-600 z-10" />
-                </motion.div>
-              </>
-            )}
-          </div>
-        ) : (
-          "Get"
-        )}
-      </motion.button>
+      <span className="text-zinc-500 text-md block sm:hidden">
+        {app.description}
+      </span>
     </div>
   );
 };

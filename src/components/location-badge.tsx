@@ -28,7 +28,7 @@ export default function LocationBadge({
       onClick={() => {
         onChangeLocation(location);
       }}
-      className="rounded-full py-1 pl-2 pr-4 flex items-center gap-x-2 bg-white transition-colors duration-150 hover:bg-zinc-200 ease-linear cursor-pointer"
+      className="rounded-full w-[15rem] justify-center py-1 pl-2 pr-4 flex items-center gap-x-2 bg-white transition-colors duration-150 sm:justify-start hover:bg-zinc-200 ease-linear cursor-pointer"
     >
       <Image
         src={location.imageSrc}

@@ -172,7 +172,7 @@ export default function MapLocationComponent() {
 
   return (
     <div className="flex flex-col gap-y-16">
-      <div className="flex items-center gap-x-4">
+      <div className="flex flex-col sm:flex-row items-center gap-4">
         {locations.map((location, index) => (
           <LocationBadge
             location={location}
@@ -184,7 +184,7 @@ export default function MapLocationComponent() {
 
       <div className="flex w-full justify-center relative">
         <motion.div
-          className="w-[19rem] sm:w-[30rem] flex items-start rounded-[4rem] absolute top-[5px]"
+          className="w-[20rem] sm:w-[30rem] flex items-start rounded-[4rem] absolute top-[5px]"
           onClick={handleClick}
         >
           <motion.div
@@ -309,7 +309,7 @@ export default function MapLocationComponent() {
         </motion.div>
 
         <motion.div
-          className="bg-white rounded-[4.2rem] w-[30.6rem]"
+          className="bg-white rounded-[4.2rem] w-[20.8rem] sm:w-[30.6rem]"
           style={{ height: whiteBackgroundHeight }}
         />
       </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { isMobile } from "@/utils/is-mobile";
 import { motion, Spring, useSpring } from "framer-motion";
 import { useRef, useState } from "react";
 
@@ -10,7 +11,7 @@ const artSpring: Spring = {
   restDelta: 0.001,
 };
 
-const defaultWidthSize = "80%";
+const defaultWidthSize = isMobile() ? "100%" : "80%";
 
 export default function ArtComponent() {
   const [mousePosition, setMousePosition] = useState({});
@@ -72,7 +73,7 @@ export default function ArtComponent() {
 
   return (
     <div
-      className="relative w-[60%] h-full flex justify-center"
+      className="relative w-full sm:w-[80%] h-full flex justify-center"
       onMouseMove={(e: React.MouseEvent) => handleMouseMove(e.nativeEvent)}
     >
       <motion.img

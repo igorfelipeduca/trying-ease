@@ -7,6 +7,7 @@ type SectionProps = {
   title: string;
   cssTerms: string[];
   className?: string;
+  desktopOnly?: boolean;
 };
 
 export default function Section({
@@ -16,12 +17,19 @@ export default function Section({
   title,
   cssTerms,
   className,
+  desktopOnly,
 }: SectionProps) {
   return (
     <div className={`flex flex-col w-full ${className}`}>
       <div className="w-full h-[1px] bg-zinc-900" />
 
       <div className="flex flex-col gap-y-8 px-8 py-16">
+        {desktopOnly && (
+          <div className="rounded-xl w-fit bg-zinc-950 border border-zinc-800 px-4 py-2 flex items-center justify-center font-medium sm:hidden">
+            Desktop-only animation
+          </div>
+        )}
+
         <div className="flex flex-col sm:flex-row item-start sm:items-center gap-4">
           {headerImage && (
             <Image
