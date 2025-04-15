@@ -2,7 +2,6 @@
 
 import { AnimationChart } from "@/components/animation-chart";
 import ArtComponent from "@/components/art-component";
-import Badge from "@/components/badge";
 import CommitHistory from "@/components/commit-history";
 import EndingSection from "@/components/ending-section";
 import EssentialApps from "@/components/essential-apps";
